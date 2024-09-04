@@ -1,6 +1,6 @@
 use std::env;
 use std::collections::VecDeque;
-
+use std::io::{self, Write};
 
 fn main() {
     let input: Vec<char> = env::args().collect::<Vec<String>>()[1].chars().collect();
@@ -39,8 +39,19 @@ fn main() {
                 instruction_pointer += 1;
             },
             '.' => {
-                instruction_pointer += 1;
                 print!("{}", cells[memory_pointer] as char);
+                instruction_pointer += 1;
+            },
+            ',' => {
+                let mut input: String = String::new();
+                io::stdin().read_line(&mut input).expect("failed to read input");
+                let b: &[u8] = input.as_bytes();
+                if b.len() == 0 {
+                    cells[memory_pointer] = 0;
+                } else {
+                    cells[memory_pointer] = b[0];
+                }
+                instruction_pointer += 1;
             },
             '[' => {
                 if cells[memory_pointer] == 0 {
