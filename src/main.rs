@@ -1,6 +1,6 @@
 use std::env;
 use std::collections::VecDeque;
-use std::io::{self, Write};
+use std::io;
 
 fn main() {
     let input: Vec<char> = env::args().collect::<Vec<String>>()[1].chars().collect();
